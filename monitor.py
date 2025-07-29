@@ -1,37 +1,22 @@
-
 from time import sleep
 import sys
-
-
-def vitals_ok(temperature, pulseRate, spo2):
-  if temperature > 102 or temperature < 95:
-    print('Temperature critical!')
-    for i in range(6):
-      print('\r* ', end='')
-      sys.stdout.flush()
-      sleep(1)
-      print('\r *', end='')
-      sys.stdout.flush()
-      sleep(1)
-    return False
-  elif pulseRate < 60 or pulseRate > 100:
-    print('Pulse Rate is out of range!')
-    for i in range(6):
-      print('\r* ', end='')
-      sys.stdout.flush()
-      sleep(1)
-      print('\r *', end='')
-      sys.stdout.flush()
-      sleep(1)
-    return False
-  elif spo2 < 90:
-    print('Oxygen Saturation out of range!')
-    for i in range(6):
-      print('\r* ', end='')
-      sys.stdout.flush()
-      sleep(1)
-      print('\r *', end='')
-      sys.stdout.flush()
-      sleep(1)
-    return False
-  return True
+ 
+def blink_alert(message, duration=6):
+    print(message)
+    for _ in range(duration):
+        for symbol in ['* ', ' *']:
+            print(f'\r{symbol}', end='')
+            sys.stdout.flush()
+            sleep(1)
+ 
+def vitals_ok(temperature, pulse_rate, spo2):
+    if temperature > 102 or temperature < 95:
+        blink_alert('Temperature critical!')
+        return False
+    if pulse_rate < 60 or pulse_rate > 100:
+        blink_alert('Pulse Rate is out of range!')
+        return False
+    if spo2 < 90:
+        blink_alert('Oxygen Saturation out of range!')
+        return False
+    return True
