@@ -10,9 +10,7 @@ def blink_alert(message, duration=6):
             sleep(1)
  
 def vitals_ok(temperature, pulseRate, spo2):
-    if (temperature_ok(temperature) and pulse_rate_ok(pulseRate) and spo2_ok(spo2)):
-        return True
-    return False
+    return (temperature_ok(temperature) and pulse_rate_ok(pulseRate) and spo2_ok(spo2))
 
 def temperature_ok(temperature):
     if temperature > 102 or temperature < 95:
